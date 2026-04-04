@@ -1,0 +1,37 @@
+project:
+  name: "AMM IL Stress Demo"
+
+tokens:
+  token0:
+    symbol: "ETH"
+    name: "Ether"
+    decimals: 18
+  token1:
+    symbol: "USDC"
+    name: "USD Coin"
+    decimals: 6
+
+pool:
+  initial_reserve0: "100"
+  initial_reserve1: "200000"
+  fee_rate: "0.003"
+  initial_lp_owner: "genesis_lp"
+
+events:
+  - timestamp: 1
+    type: "add_liquidity"
+    actor: "lp_b"
+    amount0: "50"
+    amount1: "100000"
+  - timestamp: 2
+    type: "external_price_update"
+    actor: "market"
+    price_token1_per_token0: "4000"
+    target_lp_owner: "genesis_lp"
+
+output:
+  directory: "outputs/il_stress"
+  save_plots: true
+
+visualization:
+  enabled: true
