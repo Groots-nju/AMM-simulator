@@ -12,6 +12,10 @@ def test_makefile_contains_expected_delivery_targets() -> None:
     assert "$(PYTHON) run_all_demos.py" in makefile_content
     assert re.search(r"^test:\s*$", makefile_content, re.MULTILINE)
     assert "\tpytest" in makefile_content or "\npytest\n" in makefile_content
+    assert re.search(r"^web-backend:\s*$", makefile_content, re.MULTILINE)
+    assert "$(PYTHON) -m uvicorn backend.app.main:app --reload --port 8000" in makefile_content
+    assert re.search(r"^web-frontend:\s*$", makefile_content, re.MULTILINE)
+    assert "\tcd frontend && npm run dev" in makefile_content
 
 
 def test_project_status_document_mentions_acceptance_flow() -> None:
@@ -40,3 +44,14 @@ def test_final_checklist_and_gitignore_cover_release_cleanup() -> None:
     assert "outputs/" in gitignore_content
     assert ".pytest_cache/" in gitignore_content
     assert "__pycache__/" in gitignore_content
+
+
+def test_readme_mentions_web_run_entrypoints() -> None:
+    project_dir = Path(__file__).resolve().parents[1]
+    readme_content = (project_dir / "README.md").read_text(encoding="utf-8")
+
+    assert "make web-backend" in readme_content
+    assert "make web-frontend" in readme_content
+    assert "http://localhost:8000/health" in readme_content
+    assert "http://localhost:3000" in readme_content
+    assert "建议启动顺序" in readme_content

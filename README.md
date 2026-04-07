@@ -215,6 +215,8 @@ pip install -r requirements.txt
 make demo
 make demos
 make test
+make web-backend
+make web-frontend
 ```
 
 ### 运行 demo
@@ -254,10 +256,16 @@ python run_all_demos.py
 - 后端：FastAPI
 - 前端：Next.js
 
+建议启动顺序：
+
+1. 先启动 FastAPI 后端
+2. 再启动 Next.js 前端
+3. 最后打开浏览器访问 `http://localhost:3000`
+
 ### 启动后端
 
 ```bash
-uvicorn backend.app.main:app --reload --port 8000
+make web-backend
 ```
 
 可访问：
@@ -268,9 +276,8 @@ uvicorn backend.app.main:app --reload --port 8000
 ### 启动前端
 
 ```bash
-cd frontend
-npm install
-npm run dev
+cd frontend && npm install
+make web-frontend
 ```
 
 浏览器访问：
@@ -285,6 +292,14 @@ http://localhost:3000
 - 选择场景并运行仿真
 - 展示最小 summary 字段
 - 在后端不可用时显示基础错误提示
+- 展示后端生成的图表和简版事件记录
+
+### 如果启动失败，优先检查
+
+- 后端是否已经运行在 `localhost:8000`
+- 前端是否从 [frontend/package.json](/Users/wusuoweidemac/Desktop/jrrg2026-main/AMM%20%E4%BA%A4%E6%98%93%E6%89%80%E4%BB%BF%E7%9C%9F/frontend/package.json) 安装过依赖
+- 端口 `8000` 和 `3000` 是否已被其他程序占用
+- 浏览器页面中的错误提示是否提示后端不可用
 
 ## 测试命令
 
