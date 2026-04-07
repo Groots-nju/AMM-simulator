@@ -9,6 +9,7 @@
 - `README.md`
 - `PROJECT_STATUS.md`
 - `FINAL_CHECKLIST.md`
+- `TESTING.md`
 - `Makefile`
 - `requirements.txt`
 - `main.py`
@@ -63,6 +64,18 @@ make test
 确认：
 
 - `pytest` 全部通过
+- `TESTING.md` 中描述的测试范围与当前实现一致
+
+## 5.1 Web 运行入口检查
+
+```bash
+make -n web-backend web-frontend
+```
+
+确认：
+
+- `make web-backend` 指向当前 FastAPI 启动命令
+- `make web-frontend` 指向当前 Next.js 启动命令
 
 ## 6. 输出文件检查
 
@@ -88,6 +101,7 @@ make test
 - `README.md`
 - `PROJECT_STATUS.md`
 - `FINAL_CHECKLIST.md`
+- `TESTING.md`
 - `data/README.md`
 
 需要确认：

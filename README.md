@@ -248,6 +248,7 @@ python run_all_demos.py
 
 更完整的验收和演示顺序见 [PROJECT_STATUS.md](PROJECT_STATUS.md)。
 提交前最终检查见 [FINAL_CHECKLIST.md](FINAL_CHECKLIST.md)。
+当前测试范围与手工 smoke 验证边界见 [TESTING.md](TESTING.md)。
 
 ## Web 使用说明
 
@@ -316,6 +317,8 @@ pytest
 - LP 与 IL 分析
 - CLI demo 能否跑通
 - 图表和 JSON 文件是否生成
+
+更细的测试边界说明见 [TESTING.md](TESTING.md)。当前 Web 层仍采用轻量 smoke 验证，不包含重型浏览器自动化框架。
 
 ## 输出结果说明
 

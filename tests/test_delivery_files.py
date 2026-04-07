@@ -28,6 +28,8 @@ def test_project_status_document_mentions_acceptance_flow() -> None:
     assert "make demos" in status_content
     assert "make test" in status_content
     assert "当前限制" in status_content
+    assert "make web-backend" in status_content
+    assert "make web-frontend" in status_content
 
 
 def test_final_checklist_and_gitignore_cover_release_cleanup() -> None:
@@ -55,3 +57,15 @@ def test_readme_mentions_web_run_entrypoints() -> None:
     assert "http://localhost:8000/health" in readme_content
     assert "http://localhost:3000" in readme_content
     assert "建议启动顺序" in readme_content
+
+
+def test_testing_doc_describes_automation_and_smoke_boundaries() -> None:
+    project_dir = Path(__file__).resolve().parents[1]
+    testing_content = (project_dir / "TESTING.md").read_text(encoding="utf-8")
+
+    assert "已自动化覆盖的部分" in testing_content
+    assert "Web 当前的轻量验证方式" in testing_content
+    assert "当前未自动化覆盖的部分" in testing_content
+    assert "pytest -q" in testing_content
+    assert "make web-backend" in testing_content
+    assert "make web-frontend" in testing_content

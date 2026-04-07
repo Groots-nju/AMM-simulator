@@ -9,6 +9,7 @@
 - 本地实现的恒定乘积 AMM 核心逻辑
 - 可执行的事件驱动仿真流程
 - 可复现的多场景 demo 配置
+- 本地 FastAPI + Next.js Web MVP
 - 图表输出
 - JSON 结果导出
 - 自动化测试
@@ -32,6 +33,8 @@
 - JSON 导出
 - 多场景 demo
 - 批量运行全部 demo
+- FastAPI 后端接口
+- Next.js 本地前端页面
 - `pytest` 回归测试
 
 ## 快速验收步骤
@@ -74,6 +77,19 @@ make test
 预期看到：
 
 - `pytest` 全部通过
+
+### 5. 跑本地 Web MVP
+
+```bash
+make web-backend
+make web-frontend
+```
+
+预期看到：
+
+- 后端运行在 `http://localhost:8000`
+- 前端运行在 `http://localhost:3000`
+- 页面可加载场景列表，并能运行内置 demo
 
 ## 推荐演示顺序
 
@@ -150,7 +166,8 @@ make demos
 - 不支持集中流动性
 - 不支持真实链上交互
 - 不支持代理策略系统
-- 不支持数据库或 Web 前端
+- 不支持数据库
+- 不支持生产级部署与鉴权体系
 - 不以生产部署为目标
 
 ## 哪些属于后续扩展，而非当前已实现
@@ -172,5 +189,7 @@ make demos
 make demo
 make demos
 make test
+make web-backend
+make web-frontend
 make clean
 ```
