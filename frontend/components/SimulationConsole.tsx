@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 
 import type { ScenarioItem, SimulationResponse } from "../lib/api";
 import { simulateScenario } from "../lib/api";
+import { EventRecordsPanel } from "./EventRecordsPanel";
+import { PlotGallery } from "./PlotGallery";
 import { RunButton } from "./RunButton";
 import { ScenarioSelector } from "./ScenarioSelector";
 import { SummaryPanel } from "./SummaryPanel";
@@ -86,6 +88,8 @@ export function SimulationConsole({
       ) : null}
 
       <SummaryPanel result={result} />
+      <PlotGallery result={result} />
+      <EventRecordsPanel result={result} />
     </div>
   );
 }

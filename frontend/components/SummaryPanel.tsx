@@ -79,8 +79,8 @@ export function SummaryPanel({ result }: SummaryPanelProps) {
       </div>
 
       <div className="placeholder-panel">
-        Plot and event detail panels will be added in the next stage. This page already uses the
-        live FastAPI backend response that the chart and detail views will build on.
+        The generated plots and simplified event records are shown below. This view is driven
+        directly by the live FastAPI simulation response.
       </div>
     </section>
   );

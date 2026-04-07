@@ -15,21 +15,28 @@ export type SimulationSummary = {
   external_price_update_event_count?: number;
 };
 
+export type PlotLink = {
+  name: string;
+  url: string;
+};
+
+export type EventRecordBrief = {
+  step: number;
+  timestamp: number;
+  event_type: string;
+  actor: string;
+  amount_in?: string | null;
+  amount_out?: string | null;
+  slippage?: string | null;
+  il_pct?: string | null;
+};
+
 export type SimulationResponse = {
   scenario: ScenarioItem;
   summary: SimulationSummary;
-  plots: Array<{ name: string; url: string }>;
+  plots: PlotLink[];
   exports: Record<string, string>;
-  event_records: Array<{
-    step: number;
-    timestamp: number;
-    event_type: string;
-    actor: string;
-    amount_in?: string | null;
-    amount_out?: string | null;
-    slippage?: string | null;
-    il_pct?: string | null;
-  }>;
+  event_records: EventRecordBrief[];
 };
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000";
@@ -64,6 +71,18 @@ async function parseJsonOrThrow<T>(response: Response): Promise<T> {
     throw new Error(detail);
   }
   return (await response.json()) as T;
+}
+
+export function resolveArtifactUrl(path: string): string {
+  if (path.startsWith("http://") || path.startsWith("https://")) {
+    return path;
+  }
+
+  if (path.startsWith("/")) {
+    return `${API_BASE_URL}${path}`;
+  }
+
+  return `${API_BASE_URL}/${path}`;
 }
 
 export async function getScenarios(): Promise<ScenarioItem[]> {
