@@ -34,6 +34,22 @@ export type SimulationResponse = {
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000";
 
+function toUserFriendlyErrorMessage(error: unknown, context: "scenarios" | "simulate"): string {
+  const fallback =
+    context === "scenarios"
+      ? "Failed to load scenarios from backend."
+      : "Simulation request failed. Please retry.";
+
+  if (error instanceof Error) {
+    if (error.message === "fetch failed") {
+      return "Backend is unavailable. Please make sure FastAPI is running on localhost:8000.";
+    }
+    return error.message;
+  }
+
+  return fallback;
+}
+
 async function parseJsonOrThrow<T>(response: Response): Promise<T> {
   if (!response.ok) {
     let detail = `Request failed with status ${response.status}`;
@@ -51,20 +67,28 @@ async function parseJsonOrThrow<T>(response: Response): Promise<T> {
 }
 
 export async function getScenarios(): Promise<ScenarioItem[]> {
-  const response = await fetch(`${API_BASE_URL}/scenarios`, {
-    cache: "no-store",
-  });
-  return parseJsonOrThrow<ScenarioItem[]>(response);
+  try {
+    const response = await fetch(`${API_BASE_URL}/scenarios`, {
+      cache: "no-store",
+    });
+    return await parseJsonOrThrow<ScenarioItem[]>(response);
+  } catch (error) {
+    throw new Error(toUserFriendlyErrorMessage(error, "scenarios"));
+  }
 }
 
 export async function simulateScenario(scenarioId: string): Promise<SimulationResponse> {
-  const response = await fetch(`${API_BASE_URL}/simulate`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ scenario_id: scenarioId }),
-    cache: "no-store",
-  });
-  return parseJsonOrThrow<SimulationResponse>(response);
+  try {
+    const response = await fetch(`${API_BASE_URL}/simulate`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ scenario_id: scenarioId }),
+      cache: "no-store",
+    });
+    return await parseJsonOrThrow<SimulationResponse>(response);
+  } catch (error) {
+    throw new Error(toUserFriendlyErrorMessage(error, "simulate"));
+  }
 }

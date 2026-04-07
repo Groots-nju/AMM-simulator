@@ -46,6 +46,8 @@
 - 无常损失（Impermanent Loss）分析
 - 顺序事件执行引擎
 - CLI 运行入口
+- FastAPI 后端接口层
+- Next.js 本地 Web 前端
 - 图表输出
 - JSON 结果导出
 - `pytest` 核心测试
@@ -62,6 +64,20 @@ AMM 交易所仿真/
 ├── main.py
 ├── README.md
 ├── requirements.txt
+├── backend/
+│   ├── requirements.txt
+│   └── app/
+│       ├── main.py
+│       ├── scenario_registry.py
+│       ├── schemas.py
+│       ├── services.py
+│       └── routers/
+├── frontend/
+│   ├── app/
+│   ├── components/
+│   ├── lib/
+│   ├── package.json
+│   └── tsconfig.json
 ├── data/
 │   ├── README.md
 │   ├── demo.yaml
@@ -111,6 +127,24 @@ AMM 交易所仿真/
 最小执行层。
 
 - `engine.py`：按配置顺序执行事件，并生成 `SimulationResult`
+
+#### `backend/`
+
+Web API 层。
+
+- `FastAPI` 封装现有仿真逻辑
+- 提供健康检查、场景列表和仿真运行接口
+- 提供图表与导出结果的静态访问路径
+
+#### `frontend/`
+
+本地 Web 展示层。
+
+- `Next.js` 首页
+- 场景选择
+- 运行仿真按钮
+- summary 展示
+- 基础 loading / error 状态
 
 #### `tests/`
 
@@ -212,6 +246,45 @@ python run_all_demos.py
 
 更完整的验收和演示顺序见 [PROJECT_STATUS.md](PROJECT_STATUS.md)。
 提交前最终检查见 [FINAL_CHECKLIST.md](FINAL_CHECKLIST.md)。
+
+## Web 使用说明
+
+当前项目已经包含一个本地 Web MVP：
+
+- 后端：FastAPI
+- 前端：Next.js
+
+### 启动后端
+
+```bash
+uvicorn backend.app.main:app --reload --port 8000
+```
+
+可访问：
+
+- `http://localhost:8000/health`
+- `http://localhost:8000/docs`
+
+### 启动前端
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+浏览器访问：
+
+```text
+http://localhost:3000
+```
+
+当前 Web 页面已支持：
+
+- 从后端加载内置 demo 场景
+- 选择场景并运行仿真
+- 展示最小 summary 字段
+- 在后端不可用时显示基础错误提示
 
 ## 测试命令
 

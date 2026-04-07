@@ -79,6 +79,11 @@ export function SimulationConsole({
       {isRunning ? <div className="status loading">Running simulation...</div> : null}
       {error ? <div className="status error">{error}</div> : null}
       {result && !error ? <div className="status success">Simulation completed successfully.</div> : null}
+      {!result && !error && !isRunning ? (
+        <div className="status neutral">
+          Ready to run. Choose one of the built-in demo scenarios and click Run Simulation.
+        </div>
+      ) : null}
 
       <SummaryPanel result={result} />
     </div>

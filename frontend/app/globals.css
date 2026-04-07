@@ -133,6 +133,11 @@ select {
   font-size: 0.95rem;
 }
 
+.status.neutral {
+  background: #f3f6fa;
+  color: var(--text-muted);
+}
+
 .status.loading {
   background: #eef5ff;
   color: #1c4fc7;
@@ -176,6 +181,22 @@ select {
 .summary-heading {
   margin: 0 0 14px;
   font-size: 1.15rem;
+}
+
+.summary-empty {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.placeholder-panel {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  background: var(--panel-muted);
+  color: var(--text-muted);
+  line-height: 1.6;
 }
 
 @media (max-width: 640px) {
