@@ -14,6 +14,7 @@ from .models import (
 )
 from .pool import Pool
 from .reporting import build_summary
+from .simulation_runner import SimulationRunOutput, run_simulation_from_config
 from .visualization import save_visualizations
 
 __all__ = [
@@ -29,5 +30,7 @@ __all__ = [
     "analyze_impermanent_loss",
     "build_summary",
     "export_simulation_result",
+    "SimulationRunOutput",
+    "run_simulation_from_config",
     "save_visualizations",
 ]

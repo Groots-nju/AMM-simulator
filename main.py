@@ -3,16 +3,11 @@
 from __future__ import annotations
 
 import argparse
-from pathlib import Path
 
-from src.config import load_config
 from src.decimal_utils import format_decimal, format_percent
-from src.exporters import export_simulation_result
 from src.models import SimulationResult
 from src.pool import Pool
-from src.reporting import build_summary
-from src.visualization import save_visualizations
-from simulator.engine import SimulationEngine
+from src.simulation_runner import run_simulation_from_config
 
 
 def parse_args() -> argparse.Namespace:
@@ -23,30 +18,8 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    config = load_config(args.config)
-
-    pool_cfg = config["pool"]
-    pool = Pool(
-        token0=config["tokens"]["token0"],
-        token1=config["tokens"]["token1"],
-        fee_rate=pool_cfg["fee_rate"],
-    )
-    engine = SimulationEngine(
-        pool=pool,
-        scenario_name=config["project_name"],
-        initial_lp_owner=pool_cfg["initial_lp_owner"],
-        initial_reserve0=pool_cfg["initial_reserve0"],
-        initial_reserve1=pool_cfg["initial_reserve1"],
-    )
-    result = engine.run(config["events"])
-
-    output_dir = Path(config["output"]["directory"])
-    if config["visualization"]["enabled"] and config["output"]["save_plots"]:
-        result.plot_paths.extend(save_visualizations(result, output_dir))
-
-    result.summary = build_summary(pool, result)
-    result.export_paths = export_simulation_result(result, output_dir)
-    print_summary(pool, result)
+    run_output = run_simulation_from_config(args.config)
+    print_summary(run_output.pool, run_output.result)
 
 
 def print_summary(pool: Pool, result: SimulationResult) -> None:
