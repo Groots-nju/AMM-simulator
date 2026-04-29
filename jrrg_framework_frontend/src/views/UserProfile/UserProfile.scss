@@ -1,0 +1,87 @@
+.user-profile-layout {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0faff, #e0f7fa, #ffffff);
+  font-family: 'Segoe UI', sans-serif;
+  color: #1a2b3c;
+
+  .header {
+    display: flex;
+    align-items: center;
+    padding: 24px 40px;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(200, 200, 200, 0.3);
+
+    .avatar {
+      margin-right: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .nickname {
+        white-space: normal;  /* 允许换行 */
+        overflow: visible;    /* 显示全部 */
+        text-overflow: unset; /* 取消省略号 */
+        max-width: none;      /* 取消最大宽度限制 */
+        word-break: break-word; /* 遇长单词或连续字符换行 */
+        font-size: 24px;
+        font-weight: 600;
+        color: #0a1f33;
+    }
+  }
+
+  .content {
+    padding: 40px;
+    
+    .user-info-card {
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(220, 220, 220, 0.4);
+
+      .ant-descriptions-title {
+        font-size: 20px;
+        color: #0a1f33;
+        padding-top: 16px;
+        padding-right: 24px;
+        padding-bottom: 0px;
+        padding-left: 24px;
+
+      }
+
+      .ant-descriptions-item-label {
+        font-weight: 600;
+        color: #1a2b3c;
+      }
+
+      .ant-descriptions-item-content { 
+        color: #34495e;
+      }
+    }
+
+    .ant-card {
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+      color: #2c3e50;
+    }
+  }
+
+  .footer {
+    text-align: center;
+    padding: 20px 0;
+    background: transparent;
+    font-size: 14px;
+    color: #7f8c8d;
+  }
+
+  .loading-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f0faff, #e0f7fa, #ffffff);
+  }
+}

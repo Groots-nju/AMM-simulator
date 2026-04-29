@@ -1,0 +1,81 @@
+.modify-container {
+  padding: 40px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0faff, #e0f7fa, #ffffff);
+  font-family: 'Segoe UI', sans-serif;
+  color: #1a2b3c;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  .modify-box {
+    width: 100%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.45);
+    border-radius: 20px;
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    padding: 40px;
+    
+    h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #0a1f33;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .field-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+
+      label {
+        font-weight: 600;
+        width: 90px;
+        color: #1a2b3c;
+      }
+
+      .field-value {
+        flex: 1;
+        padding: 8px 12px;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .ant-input {
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid #d0e4f7;
+        padding: 8px 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      }
+
+      .ant-btn {
+        font-weight: 600;
+        border-radius: 10px;
+        padding: 6px 16px;
+        box-shadow: 0 4px 12px rgba(30, 203, 225, 0.3);
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 6px 20px rgba(26, 143, 217, 0.35);
+        }
+
+        &.ant-btn-primary {
+          background: linear-gradient(to right, #1ecbe1, #1a8fd9);
+          border: none;
+          color: #fff;
+        }
+
+        &.ant-btn-link {
+          color: #1a8fd9;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

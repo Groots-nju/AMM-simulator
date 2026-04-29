@@ -1,0 +1,166 @@
+.exchange-layout {
+  min-height: 100vh;
+  background: #f5f7fb;
+  color: #172033;
+}
+
+.exchange-header {
+  height: 64px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: #ffffff;
+  border-bottom: 1px solid #e6eaf2;
+}
+
+.brand-cluster {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 300px;
+  cursor: pointer;
+}
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.brand-title {
+  color: #132033;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.brand-subtitle {
+  margin-top: 2px;
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.header-market-strip {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.header-market-strip span {
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  border: 1px solid #dfe6ef;
+  border-radius: 6px;
+  color: #42526e;
+  background: #f8fafc;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.account-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 10px 0 4px;
+  border: 1px solid #dfe6ef;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #172033;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.exchange-main {
+  min-height: calc(100vh - 64px);
+}
+
+.exchange-sider {
+  background: #ffffff !important;
+  border-right: 1px solid #e6eaf2;
+}
+
+.exchange-menu {
+  padding: 14px 10px;
+  border-inline-end: 0 !important;
+}
+
+.exchange-menu .ant-menu-item {
+  height: 42px;
+  border-radius: 6px;
+  margin: 4px 0;
+  color: #42526e;
+  font-weight: 700;
+}
+
+.exchange-menu .ant-menu-item-selected {
+  background: #e8f6f1 !important;
+  color: #067a57 !important;
+}
+
+.exchange-content-layout {
+  background: #f5f7fb;
+}
+
+.exchange-breadcrumb {
+  padding: 14px 24px 0;
+  color: #667085;
+}
+
+.exchange-content {
+  padding: 14px 24px 24px;
+}
+
+.exchange-footer {
+  padding: 12px 24px 20px;
+  background: transparent;
+  color: #7b8497;
+  font-size: 13px;
+}
+
+@media (max-width: 860px) {
+  .exchange-header {
+    height: auto;
+    padding: 12px;
+    flex-wrap: wrap;
+  }
+
+  .brand-cluster {
+    min-width: 0;
+    flex: 1 1 100%;
+  }
+
+  .header-market-strip {
+    flex-wrap: wrap;
+  }
+
+  .exchange-main {
+    flex-direction: column;
+  }
+
+  .exchange-sider {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    flex: 0 0 auto !important;
+  }
+
+  .exchange-menu {
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .exchange-menu .ant-menu-item {
+    min-width: 126px;
+  }
+
+  .exchange-content {
+    padding: 12px;
+  }
+}
