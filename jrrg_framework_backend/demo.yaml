@@ -1,0 +1,31 @@
+# DeFi AMM 交易所仿真系统 - Demo 配置文件
+# 使用方式: python main.py --config demo.yaml
+
+# 服务配置
+server:
+  host: "localhost"
+  port: 8080
+  debug: true
+
+# 数据库配置
+database:
+  # 可选: sqlite（默认）、memory（内存模式，重启数据丢失）
+  type: "sqlite"
+  # SQLite 数据库文件路径（仅 type=sqlite 时有效）
+  path: "exchange_simulator.db"
+
+# JWT 配置
+jwt:
+  secret_key: "local_exchange_simulator_secret"
+
+# 仿真数据配置
+simulation:
+  # 是否自动初始化默认用户和交易所数据
+  seed_data: true
+  # 默认用户
+  default_user:
+    username: "admin"
+    password: "123456"
+    nickname: "AMM Trader"
+    email: "trader@example.com"
+    phone: "16666666666"
