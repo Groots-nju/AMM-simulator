@@ -1,0 +1,84 @@
+
+name: Groots DeepSeek Coding Agent
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: groots-ai-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  implement:
+    if: >-
+      github.event.label.name == 'ai-task' &&
+      github.event.sender.login == 'Groots-nju' &&
+      github.repository == 'Groots-nju/AMM-simulator' &&
+      !github.event.issue.pull_request
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check required secrets
+        env:
+          DS: ${{ secrets.DEEPSEEK_API_KEY }}
+          APP_ID: ${{ secrets.GROOTS_APP_ID }}
+          APP_KEY: ${{ secrets.GROOTS_APP_PRIVATE_KEY }}
+        run: |
+          test -n "$DS" || exit 1
+          test -n "$APP_ID" || exit 1
+          test -n "$APP_KEY" || exit 1
+
+      - name: Authenticate Groots GitHub App
+        id: bot-token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.GROOTS_APP_ID }}
+          private-key: ${{ secrets.GROOTS_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: AMM-simulator
+          permission-contents: write
+          permission-pull-requests: write
+          permission-issues: write
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Implement issue with DeepSeek
+        uses: anomalyco/opencode/github@latest
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          GITHUB_TOKEN: ${{ steps.bot-token.outputs.token }}
+        with:
+          use_github_token: true
+          model: deepseek/deepseek-flash
+          share: false
+          prompt: |
+            Implement GitHub Issue #${{ github.event.issue.number }}.
+
+            Read the issue and relevant source files first.
+
+            Implement the requested changes in Python/Flask
+            or React application code.
+
+            Add appropriate tests when possible.
+
+            Work on a separate feature branch.
+            Create a pull request for human review.
+
+            Do not push directly to main.
+            Do not merge the pull request.
+
+            Do not modify secrets, CI workflows,
+            access permissions or deployment credentials.
+
+            Explain the code changes and test results
+            in Chinese.
